@@ -13,8 +13,14 @@
 		}
 		//main countdown function
 		function countdown_proc() {
-			eventDate = Date.parse(settings['date']) / 1000;
-			console.log(eventDate);
+			var eventDate = null;
+			if (typeof(settings['date']) == 'string'){
+				eventDate = Date.parse(settings['date']) / 1000;
+			}
+			else {
+				eventDate = settings['date'].getTime() / 1000;
+				console.log(eventDate + "Date");
+			}
 			/*
 			Adding 6 (i.e. 360min * 60) hours to eventDate to convert boulder time to UTC
 			Then, get the user's timezone offset and add it to the currentDate

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>#CodeWithAbhi</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/construction-style.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="js/countdown.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            "use strict";
+            $("#countdown").countdown({
+                date: '<%- countdownDate %>',
+                format: "on"
+            },function () {
+                    // callback function
+            });
+        });
+    </script>
+
+</head>
+
+<body id="backtotop">
+
+    <div class="fullwidth clearfix">
+        <div id="topcontainer" class="bodycontainer clearfix">
+
+            <img alt="Under construction" src="images/pullrequest.png" height="200">
+            <h1># CodeWithAbhi
+                <br>
+            </h1>
+            <h2>Just another blog</h2>
+            <p>System.out.print("Launching soooon");</p>
+
+        </div>
+    </div>
+
+    <div class="arrow-separator arrow-white"></div>
+
+    <div class="fullwidth color1 clearfix">
+        <div id="countdown" class="bodycontainer clearfix">
+
+            <div id="countdowncont" class="clearfix">
+                <ul id="countscript">
+                    <li>
+                        <span class="days">00</span>
+                        <p>Days</p>
+                    </li>
+                    <li>
+                        <span class="hours">00</span>
+                        <p>Hours</p>
+                    </li>
+                    <li class="clearbox">
+                        <span class="minutes">00</span>
+                        <p>Minutes</p>
+                    </li>
+                    <li>
+                        <span class="seconds">00</span>
+                        <p>Seconds</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer color2 clearfix">
+        <a href="https://www.github.com/pampas93" target="_blank">
+            <img alt="Github" src="images/icon-github.png">
+        </a>
+        <a href="https://www.linkedin.com/in/abhijit-srikanth/" target="_blank">
+            <img alt="LinkedIn" src="images/icon-linkedin.png">
+        </a>
+    </div>
+
+</body>
+
+</html>

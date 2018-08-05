@@ -72,8 +72,5 @@ typings/
 # Serverless directories
 .serverless
 
-# Website config file
-config.js
-
 # Data models for Keystone admin login
 updates/

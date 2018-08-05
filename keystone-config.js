@@ -1,7 +1,9 @@
 exports.options = {
 
 	'name': 'CodeWithAbhi',
-	'brand': 'Keystone Test',
+    'brand': 'Abhijit Blog',
+    
+    'cloudinary config': process.env.CLOUDINARY_URL,
 
 	'less': 'public',
 	'static': 'public',
@@ -20,8 +22,7 @@ exports.locals = {
 	utils: require('keystone-utils'),
 };
 
-// exports.nav = {
-// 	'people': ['users', 'companies', 'contacts'],
-// 	'content': ['posts', 'post-categories', 'events', 'jobs', 'galleries', 'files'],
-// 	'test-schemas': ['autocreates', 'field-tests', 'update-handler-tests', 'no-edits'],
-// };
+exports.nav = {
+	'people': ['users'],
+	'content': ['posts', 'events'],
+};

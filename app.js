@@ -1,12 +1,9 @@
+require('dotenv').load();
+
 var compression = require('compression');
 var express = require('express');
 var keystone = require('keystone');
 var morgan = require('morgan');
-
-/**
- * This is an example of creating a custom express app, binding the Admin UI
- * router to it, and using Keystone to intialise the database connection
- */
 
 var config = require('./keystone-config');
 
@@ -16,12 +13,10 @@ keystone.init(config.options);
 keystone.import('models');
 keystone.set('locals', config.locals);
 keystone.set('routes', require('./routes'));
-//keystone.set('nav', config.nav);
+keystone.set('nav', config.nav);
 
 keystone.initDatabaseConfig();
 keystone.initExpressSession();
-
-app.set('config', require('./config'));
 
 app.use(compression());
 app.use('/keystone', keystone.Admin.Server.createStaticRouter(keystone));
@@ -42,10 +37,26 @@ app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
 var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = process.env.NODE_ENV === 'development' ? err.message : 'Sorry, Seems like you landed on the wrong page.';
+  res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
 keystone.openDatabaseConnection(function () {
-	var server = app.listen(process.env.PORT || 3000, function () {
-		console.log('-------------------------------');
-		console.log('Express server ready on port %d', server.address().port);
-		console.log('-------------------------------');
-	});
+  var server = app.listen(process.env.PORT || 3001, function () {
+    console.log('-------------------------------');
+    console.log('Express server ready on port %d', server.address().port);
+    console.log('-------------------------------');
+  });
 });

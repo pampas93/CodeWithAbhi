@@ -1,42 +1,62 @@
-var createError = require('http-errors');
+require('dotenv').load();
+
+var compression = require('compression');
 var express = require('express');
+var keystone = require('keystone');
+var morgan = require('morgan');
+
+var config = require('./keystone-config');
+
+var app = new express();
+
+keystone.init(config.options);
+keystone.import('models');
+keystone.set('locals', config.locals);
+keystone.set('routes', require('./routes'));
+keystone.set('nav', config.nav);
+
+keystone.initDatabaseConfig();
+keystone.initExpressSession();
+
+app.use(compression());
+app.use('/keystone', keystone.Admin.Server.createStaticRouter(keystone));
+app.use(express.static('public'));
+
+app.use(keystone.get('session options').cookieParser);
+app.use(keystone.expressSession);
+app.use(keystone.session.persist);
+app.use(require('connect-flash')());
+
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-
-var app = express();
-
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-var config = require('./config');
-app.set('config', config);
+app.use(morgan('tiny'));
+app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
+var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = process.env.NODE_ENV === 'development' ? err.message : 'Sorry, Seems like you landed on the wrong page.';
+  res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
 
-module.exports = app;
+keystone.openDatabaseConnection(function () {
+  var server = app.listen(process.env.PORT || 3001, function () {
+    console.log('-------------------------------');
+    console.log('Express server ready on port %d', server.address().port);
+    console.log('-------------------------------');
+  });
+});

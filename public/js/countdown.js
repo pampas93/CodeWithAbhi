@@ -19,9 +19,9 @@
 			}
 			else {
 				eventDate = settings['date'].getTime() / 1000;
-				console.log(eventDate + "Date");
 			}
 			/*
+			Date.parse will give seconds passed from 1970 UTC
 			Adding 6 (i.e. 360min * 60) hours to eventDate to convert boulder time to UTC
 			Then, get the user's timezone offset and add it to the currentDate
 			

@@ -1,42 +1,51 @@
-var createError = require('http-errors');
+var compression = require('compression');
 var express = require('express');
+var keystone = require('keystone');
+var morgan = require('morgan');
+
+/**
+ * This is an example of creating a custom express app, binding the Admin UI
+ * router to it, and using Keystone to intialise the database connection
+ */
+
+var config = require('./keystone-config');
+
+var app = new express();
+
+keystone.init(config.options);
+keystone.import('models');
+keystone.set('locals', config.locals);
+keystone.set('routes', require('./routes'));
+//keystone.set('nav', config.nav);
+
+keystone.initDatabaseConfig();
+keystone.initExpressSession();
+
+app.set('config', require('./config'));
+
+app.use(compression());
+app.use('/keystone', keystone.Admin.Server.createStaticRouter(keystone));
+app.use(express.static('public'));
+
+app.use(keystone.get('session options').cookieParser);
+app.use(keystone.expressSession);
+app.use(keystone.session.persist);
+app.use(require('connect-flash')());
+
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-
-var app = express();
-
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-var config = require('./config');
-app.set('config', config);
+app.use(morgan('tiny'));
+app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
+var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+keystone.openDatabaseConnection(function () {
+	var server = app.listen(process.env.PORT || 3000, function () {
+		console.log('-------------------------------');
+		console.log('Express server ready on port %d', server.address().port);
+		console.log('-------------------------------');
+	});
 });
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;

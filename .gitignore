@@ -72,5 +72,6 @@ typings/
 # Serverless directories
 .serverless
 
-# Data models for Keystone admin login
-updates/
+# Data models for Keystone admin login But keep updates folder
+updates/*
+!updates/.keep

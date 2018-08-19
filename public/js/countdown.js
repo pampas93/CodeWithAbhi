@@ -22,15 +22,15 @@
 			}
 			/*
 			Date.parse will give seconds passed from 1970 UTC
-			Adding 6 (i.e. 360min * 60) hours to eventDate to convert boulder time to UTC
-			Then, get the user's timezone offset and add it to the currentDate
+			Adding 6 (i.e. 360min * 60) hours to eventDate to convert boulder time to UTC ** Not necessary because it's already in UTC
+			Then, get the user's timezone offset which is also seconds passed from 1970
+			Now that we have everything in seconds, we subtract and there is no confusion of timezones.
 			
-			NOTE!! After November 2nd(End of daylight saving) need to change to 7 hours (i.e. 420 * 60);
 			*/
-			eventDate += 360*60;
+			//eventDate += 360*60;
 			currentDate = Math.floor($.now() / 1000);
 			var offset = new Date().getTimezoneOffset();
-			currentDate += (offset * 60);
+			//currentDate += (offset * 60);
 			if(eventDate <= currentDate) {
 				callback.call(this);
 				clearInterval(interval);

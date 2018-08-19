@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Welcome to the skeleton of CodeWithAbhi</h1>
+    <h3>Blog posts</h3>
+    <ul>
+        <% for(var i = 0; i < posts.length; i++ ) {%>
+            <li><%= posts[i].title %></li>
+        <% } %>
+    </ul>
+  </body>
+</html>

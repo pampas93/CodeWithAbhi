@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var Post = keystone.list('Post');
+var User = keystone.list('User');
 
 var postController = {};
 
@@ -18,6 +19,13 @@ postController.listPosts = async (req, res) => {
         });
 
     return posts;
+}
+
+postController.showPost = async (req, res) => {
+    var data = {};
+    data.post = await Post.model.findOne({slug: req.params.id});
+    data.user = await User.model.findOne({"_id": data.post.author}).select('displayName');
+    return data;
 }
 
 module.exports = postController;

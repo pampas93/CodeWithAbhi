@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog post</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h2><%= post.title %></h2>
+    <%- post.content.extended %>
+    <h4>Published at: <%= moment(post.publishedAt).format('MMMM Do YYYY') %></h4>
+    <h4>Author: <%= user %></h4>
+    <img src=<%= post.image.url %> />
+  </body>
+</html>

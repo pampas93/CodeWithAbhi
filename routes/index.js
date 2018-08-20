@@ -3,6 +3,7 @@ var router = express.Router();
 var keystone = require('keystone');
 var Maintainance = keystone.list('Maintainance');
 var Post = keystone.list('Post');
+var moment = require('moment');
 
 var postController = require("../controllers/PostController");
 
@@ -11,7 +12,6 @@ var postController = require("../controllers/PostController");
 router.get('/', async (req, res, next) => {
 
   if (!process.env.MAINTAINANCE) {
-
     var data = await postController.listPosts(req, res);
     res.render('home', { posts: data });
   }
@@ -25,10 +25,14 @@ router.get('/', async (req, res, next) => {
           res.render('construction', { countdownDate: object.DateTime });
         }
       }
-
     });
   }
 
 });
+
+router.get('/post/:id', async (req, res, next) => {
+  var data = await postController.showPost(req, res);
+  res.render('post', { post: data.post, user: data.user.displayName, moment: moment });
+})
 
 module.exports = router;

@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Blog</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Welcome to the skeleton of CodeWithAbhi</h1>
-    <h3>Blog posts</h3>
-    <ul>
-        <% for(var i = 0; i < posts.length; i++ ) {%>
-            <% var url = "/post/"+posts[i].slug %>
-            <li><a href=<%= url %>> <%= posts[i].title %> </a></li>
-        <% } %>
-    </ul>
-  </body>
+
+<head>
+  <title>Blog</title>
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel='stylesheet' href='/css/homepage.css' />
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-12 content">
+          <h1>Welcome to the skeleton of CodeWithAbhi</h1>
+          <h3>Blog posts</h3>
+          <div class="row">
+            <div class="col-md-9">
+
+                    <% for(var i = 0; i < posts.length; i++ ) {%>
+                    <% var url = "/post/"+posts[i].slug %>
+                    <a href=<%= url %>>
+                    <div class="row box">
+                      <div class="col-md-12">
+      
+                        <h3><%= posts[i].title %></h3>
+                        <%- posts[i].content.brief %>
+                             
+                      </div>
+                    </div>
+                  </a>
+                    <% } %>
+
+            </div>
+          </div>
+          
+      </div>
+
+    </div>
+  </div>
+
+
+</body>
+
 </html>

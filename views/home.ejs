@@ -1,55 +1,50 @@
 <!DOCTYPE html>
 <html>
+<% include templates/header.ejs %>
 
-<head>
-  <title>Blog</title>
-  
+  <body>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <div class="container">
+      <div class="row">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <link rel='stylesheet' href='/css/homepage.css' />
-</head>
-<body>
-
-  <div class="container">
-    <div class="row">
-
-      <div class="col-md-12 content">
-          <h1>Welcome to the skeleton of CodeWithAbhi</h1>
-          <h3>Blog posts</h3>
+        <div class="col-md-12 content">
+          <h1>Welcome to the beginning of CodeWithAbhi</h1> <hr>
+          <h3>Blog posts</h3> <hr>
           <div class="row">
             <div class="col-md-9">
 
-                    <% for(var i = 0; i < posts.length; i++ ) {%>
-                    <% var url = "/post/"+posts[i].slug %>
-                    <div class="row box">
-                      <div class="col-md-12" id="block">
-                        <div id="content">
-                            <a  style="text-decoration:none; color:inherit" href=<%= url %> ><h3><%= posts[i].title %></h3></a>
-                            <hr>
-                            <span class="brief"><%- posts[i].content.brief %> </span>
-                            <a class="readmore btn btn-primary" href=<%= url %> >Read More &rarr;</a>
-                        </div>
-                        <div id="home-image">
-                            <img class="img-thumbnail rounded float-right" src=<%= posts[i].image.url %> ></img>
-                        </div>  
+              <% for(var i = 0; i < posts.length; i++ ) {%>
+                <% var url = "/post/"+posts[i].slug %>
+                  <div class="row box">
+                    <div class="col-md-12" id="block">
+                      <div id="content">
+                        <a style="text-decoration:none; color:inherit" href=<%= url %> >
+                          <h3>
+                            <%= posts[i].title %>
+                          </h3>
+                        </a>
+                        <hr>
+                        <span class="brief">
+                          <%- posts[i].content.brief %>
+                        </span>
+                        <a class="readmore btn btn-primary" href=<%= url %> >Read More &rarr;</a>
+                      </div>
+                      <div id="home-image">
+                        <img class="img-thumbnail rounded float-right" src=<%= posts[i].image.url %> ></img>
                       </div>
                     </div>
-                    <% } %>
+                  </div>
+                  <% } %>
 
             </div>
           </div>
-          
+
+        </div>
+
       </div>
-
     </div>
-  </div>
 
 
-</body>
+  </body>
 
 </html>

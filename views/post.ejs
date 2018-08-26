@@ -1,57 +1,50 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>Blog post</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<% include templates/header.ejs %>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <body class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 post">
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <link rel='stylesheet' href='/css/homepage.css' />
-</head>
-
-<body class="content">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 post">
-
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <td width="65%" align="center">
-                  <h1 class="mt-4" id = "post-title">
-                    <%= post.title %>
-                  </h1>
-                  <hr>
-                  <p id="publish-text">Posted on <%= moment(post.publishedAt).format('MMMM Do YYYY') %></p>
-                </td>
-                <td width="35%">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <td width="65%" align="center">
+                    <h1 class="mt-4" id="post-title">
+                      <%= post.title %>
+                    </h1>
+                    <hr>
+                    <p id="publish-text">Posted on
+                      <%= moment(post.publishedAt).format('MMMM Do YYYY') %>
+                    </p>
+                  </td>
+                  <td width="35%">
                     <div id="post-image">
-                        <img class="img-thumbnail rounded" src=<%= post.image.url %> ></img>
-                    </div>  
-                </td>
-              </tr>
-            </thead>
-          </table>
-        </div>
-
-        <div class="row">
-          <div class="col-md-8 post-content">
-              <%- post.content.extended %>
+                      <img class="img-thumbnail rounded" src=<%= post.image.url %> ></img>
+                    </div>
+                  </td>
+                </tr>
+              </thead>
+            </table>
           </div>
+
+          <div class="row">
+            <div class="col-md-8 post-content">
+              <%- post.content.extended %>
+            </div>
+          </div>
+
+          <div class="post-content">
+
+          </div>
+
         </div>
-
-        <div class="post-content">
-            
-        </div>       
-
       </div>
     </div>
-  </div>
 
-</body>
+  </body>
 
 </html>

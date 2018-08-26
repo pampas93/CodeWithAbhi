@@ -35,4 +35,8 @@ router.get('/post/:id', async (req, res, next) => {
   res.render('post', { post: data.post, user: data.user.displayName, moment: moment });
 })
 
+router.get('/inside', function (req, res) {
+  res.render('inside', {});
+})
+
 module.exports = router;

@@ -4,6 +4,7 @@ var compression = require('compression');
 var express = require('express');
 var keystone = require('keystone');
 var morgan = require('morgan');
+var favicon = require('serve-favicon');
 
 var config = require('./keystone-config');
 
@@ -21,6 +22,7 @@ keystone.initExpressSession();
 app.use(compression());
 app.use('/keystone', keystone.Admin.Server.createStaticRouter(keystone));
 app.use(express.static('public'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 app.use(keystone.get('session options').cookieParser);
 app.use(keystone.expressSession);

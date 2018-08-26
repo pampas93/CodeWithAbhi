@@ -10,6 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel='stylesheet' href='/css/homepage.css' />
 </head>
 <body>
@@ -25,16 +26,19 @@
 
                     <% for(var i = 0; i < posts.length; i++ ) {%>
                     <% var url = "/post/"+posts[i].slug %>
-                    <a href=<%= url %>>
                     <div class="row box">
-                      <div class="col-md-12">
-      
-                        <h3><%= posts[i].title %></h3>
-                        <%- posts[i].content.brief %>
-                             
+                      <div class="col-md-12" id="block">
+                        <div id="content">
+                            <a  style="text-decoration:none; color:inherit" href=<%= url %> ><h3><%= posts[i].title %></h3></a>
+                            <hr>
+                            <span class="brief"><%- posts[i].content.brief %> </span>
+                            <a class="readmore btn btn-primary" href=<%= url %> >Read More &rarr;</a>
+                        </div>
+                        <div id="home-image">
+                            <img class="img-thumbnail rounded float-right" src=<%= posts[i].image.url %> ></img>
+                        </div>  
                       </div>
                     </div>
-                  </a>
                     <% } %>
 
             </div>

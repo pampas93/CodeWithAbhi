@@ -3,16 +3,25 @@ body {
 }
 
 .content {
-    background-color: rgb(236, 236, 236);
+    background-color: rgb(241, 241, 241);
+}
+
+.post {
+    background-color: rgb(255, 255, 255);
 }
 
 a { 
-    color: inherit;
+    color: rgb(42, 187, 42);
+}
+
+span, p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
 }
 
 .box {
 position: relative;
-display: block;
+display: table;
 width: 100%;
 overflow: auto;
 margin: 10px;
@@ -22,8 +31,8 @@ background-color: #fff;
 border-radius: 5px;
 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 border-radius: 5px;
--webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+-webkit-transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .box::after {
@@ -37,8 +46,8 @@ width: 100%;
 height: 100%;
 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 opacity: 0;
--webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+-webkit-transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .box:hover {
@@ -48,4 +57,65 @@ transform: scale(1.05, 1.05);
 
 .box:hover::after {
     opacity: 1;
+}
+
+.brief {
+    margin-top: 5px;
+}
+
+.readmore {
+    margin-top: 10px;
+}
+
+#block {
+    display: table;
+}
+
+#content {
+    padding: 20px;
+}
+
+#home-image {
+    width: 256px;
+    height: 256px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#post-image {
+    width: 300px;
+    height: 300px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#post-title {
+    text-align: center;
+    margin-top: 70px;
+    vertical-align: middle;
+}
+
+.thumbnail-image {
+    width: 256px;
+    height: 256px;
+}
+
+.post-content {
+    margin: 10px 0px 75px 75px;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: bold; 
+    text-transform: uppercase;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: bold; 
+}
+
+#publish-text{
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: bold;
 }

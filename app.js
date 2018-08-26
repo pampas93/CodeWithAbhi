@@ -36,6 +36,7 @@ app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
 
 var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
+app.use('/inside', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -3,6 +3,8 @@ body {
 }
 
 .content {
+    margin-top: 25px;
+    margin-bottom: 25px;
     background-color: rgb(241, 241, 241);
 }
 
@@ -161,4 +163,19 @@ width: auto;
     font-family: 'Montserrat', sans-serif; 
     text-transform: uppercase;
     color: white;
+}
+
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    text-align: center;
+    padding-bottom: 20px;
+ }
+
+.footer > a > img {
+	margin: 0px 10px;
+	width: 40px;
+	height: 40px;
 }
